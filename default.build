@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!--
+Written by Stephen R. Tunney, Canada (stephen.tunney@gmail.com)
+2006-02-20
+-->
+<project name="CruiseControl.NET Plugin - SendMSN" default="build">
+	<description>MSN Publisher Plugin for CruiseControl.NET</description>
+
+	<!-- global project settings -->
+	<property name="project.name" value="ThoughtWorks.CruiseControl.Plugins.Publishers.MSN" />
+	<property name="verbosity" value="true" />
+	<property name="nunit.output" value="Xml" />
+
+	<property name="project.config" value="debug" />
+
+	<property name="build.base" value="." />
+	<property name="build.home" value="${build.base}\bin" />
+	<property name="build.dir" value="${build.home}" />
+
+	<property name="solution.filename" value="ThoughtWorks.CruiseControl.Plugin.Publisher.MSN.sln" />
+
+	<target name="build">
+		<call target="init" failonerror="true" />
+		<call target="clean" failonerror="true" />
+		<call target="compile" failonerror="true" />
+		<call target="test" failonerror="true" />
+	</target>
+
+	<target name="init">
+		<if test="${not property::exists('project.config')}">
+			<fail message="project.config is not set.  What ever shall we do?" />
+		</if>
+		<if test="${not property::exists('build.home')}">
+			<fail message="build.home is not set.  Where shall the build output go?" />
+		</if>
+
+		<call target="${project.config}" />
+	</target>
+
+	<target name="debug">
+		<property name="project.config" value="Debug" />
+		<property name="build.debug" value="true" />
+		<property name="build.dir" value="${build.home}/Debug" />
+	</target>
+
+	<target name="release">
+		<property name="project.config" value="Release" />
+		<property name="build.debug" value="false" />
+		<property name="build.dir" value="${build.home}/Release" />
+	</target>
+
+	<target name="clean">
+		<if test="${not property::exists('build.base')}">
+			<fail message="build.base property not set, so can't clean" />
+		</if>
+		<if test="${not property::exists('build.home')}">
+			<fail message="build.home property not set, so can't clean" />
+		</if>
+		<if test="${not property::exists('build.dir')}">
+			<fail message="build.dir property not set, so can't clean" />
+		</if>
+
+		<delete dir="${build.home}" failonerror="false" />
+		<mkdir dir="${build.home}" failonerror="true" />
+		<mkdir dir="${build.dir}" failonerror="true" />
+    
+    <exec program="msbuild.exe" commandline="/p:Configuration=${project.config} /t:Clean" />
+  </target>
+
+	<target name="compile">
+    <exec program="msbuild.exe" commandline="/p:Configuration=${project.config} /t:Rebuild" />
+	</target>
+
+	<target name="test">
+		<call target="test.unit" failonerror="true" />
+	</target>
+
+	<target name="test.unit">
+		<nunit2 failonerror="true" verbose="${verbosity}" >
+			<formatter type="${nunit.output}" usefile="true" extension=".xml" outputdir="${build.dir}/TestResults" />
+			<test>
+				<assemblies>
+					<include name="${build.dir}/CCNet.Publisher.MSN.Tests.dll" />
+				</assemblies>
+			</test>
+		</nunit2>
+	</target>
+</project>

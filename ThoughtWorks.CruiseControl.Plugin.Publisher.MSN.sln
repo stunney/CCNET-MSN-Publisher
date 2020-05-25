@@ -1,0 +1,32 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1647D42A-6D08-4FD2-BF19-0CCA5EF04FD9}"
+	ProjectSection(SolutionItems) = preProject
+		default.build = default.build
+		HowToInstall.txt = HowToInstall.txt
+		ThoughtWorks.CruiseControl.Plugins.Publishers.MSN.ccnet.xml = ThoughtWorks.CruiseControl.Plugins.Publishers.MSN.ccnet.xml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtWorks.CruiseControl.Plugins.Publishers.MSN", "CCNet.Publisher.MSN\ThoughtWorks.CruiseControl.Plugins.Publishers.MSN.csproj", "{734FBC26-6D6C-453F-ADB4-1C2F29432FBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtWorks.CruiseControl.Plugins.Publishers.MSN.Tests", "CCNet.Publisher.MSN.Tests\ThoughtWorks.CruiseControl.Plugins.Publishers.MSN.Tests.csproj", "{829CDCF0-2F54-467A-B236-669E9DFF9215}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{734FBC26-6D6C-453F-ADB4-1C2F29432FBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{734FBC26-6D6C-453F-ADB4-1C2F29432FBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{734FBC26-6D6C-453F-ADB4-1C2F29432FBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{734FBC26-6D6C-453F-ADB4-1C2F29432FBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{829CDCF0-2F54-467A-B236-669E9DFF9215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{829CDCF0-2F54-467A-B236-669E9DFF9215}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{829CDCF0-2F54-467A-B236-669E9DFF9215}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{829CDCF0-2F54-467A-B236-669E9DFF9215}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

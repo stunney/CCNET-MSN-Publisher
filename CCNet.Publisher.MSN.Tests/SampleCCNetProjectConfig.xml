@@ -1,0 +1,89 @@
+﻿<cruisecontrol>
+	<project name="MyProject" queue="Common" queuePriority="1">
+		<workingDirectory>d:\temp\WorkingDirectory</workingDirectory>
+		<artifactDirectory>d:\temp\Artifacts</artifactDirectory>
+		<triggers>
+			<!-- Block between 8:30pm and 5:30am Monday-Friday -->
+			<filterTrigger startTime="20:30" endTime="05:30">
+				<trigger type="intervalTrigger" seconds="5" buildCondition="IfModificationExists" />
+				<weekDays>
+					<weekDay>Monday</weekDay>
+					<weekDay>Tuesday</weekDay>
+					<weekDay>Wednesday</weekDay>
+					<weekDay>Thursday</weekDay>
+					<weekDay>Friday</weekDay>
+				</weekDays>
+			</filterTrigger>
+		</triggers>
+
+		<sourcecontrol type="p4">
+			<view>//depot/features/steve.tunney/NUDBindingSample/...</view>
+			<executable>p4.exe</executable>
+			<!-- Visible in the %PATH% -->
+			<client>TEMP</client>
+			<user>steve.tunney</user>
+			<port>perforce:1666</port>
+			<applyLabel>false</applyLabel>
+			<autoGetSource>true</autoGetSource>
+			<forceSync>true</forceSync>
+			<p4WebURLFormat>http://localhost:9000/@md=d&amp;cd=//&amp;c=3IB@/{0}?ac=10</p4WebURLFormat>
+		</sourcecontrol>
+
+		<labeller type="defaultlabeller">
+			<prefix>TEST_0_0_0_</prefix>
+			<incrementOnFailure>false</incrementOnFailure>
+		</labeller>
+
+		<prebuild />
+
+		<tasks>
+			<nant>
+				<executable>nant.exe</executable>
+				<!-- Visible in the %PATH% -->
+				<buildFile>./default.build</buildFile>
+				<buildArgs>-D:scc.workspacename=TEMP</buildArgs>
+				<buildTimeoutSeconds>0</buildTimeoutSeconds>
+				<targetList>
+					<target>ContinuousIntegration</target>
+				</targetList>
+			</nant>
+		</tasks>
+
+		<publishers>
+
+			<modificationWriter>
+				<filename>Modifications.xml</filename>
+				<path>d:\temp\WorkingDirectory\</path>
+			</modificationWriter>
+
+			<merge>
+				<files>
+					<!-- NUnit Results -->
+					<file>./*.Results.xml</file>
+					<file>./Modifications.xml</file>
+				</files>
+			</merge>
+
+			<statistics />
+
+			<!-- This should always come after the Merge Publisher -->
+			<xmllogger />
+
+			<msn>
+				<msnconfig>
+					<screenName>Builder</screenName>
+					<login>SAMPLE_BUILDER_MSN_LOGIN_PASSPORT_EMAIL_ADDRESS@HOTMAIL.COM</login>
+					<password>XXXXXXXXX</password>
+					<connectTimeout>2000</connectTimeout>
+					<!-- milliseconds -->
+					<conversationTimeout>5000</conversationTimeout>
+					<!-- milliseconds -->
+				</msnconfig>
+				<msnusers>
+					<msnuser name="stephen" email="stephen.tunney@gmail.com" sccname="steve.tunney" />
+				</msnusers>
+			</msn>
+
+		</publishers>
+	</project>
+</cruisecontrol>

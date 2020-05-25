@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<msn>
+  <msnconfig>
+    <screenName>ccnetsendmsnbuild1</screenName>
+    <login>ccnetsendmsnbuild1@live.com</login>
+    <password>Password123</password>
+    <connectTimeout>2000</connectTimeout>
+    <!-- milliseconds -->
+    <conversationTimeout>5000</conversationTimeout>
+    <!-- milliseconds -->
+  </msnconfig>
+  <msnusers>
+    <msnuser name="dev1" email="ccnetsendmsndev1@live.com" sccname="dev1" />
+    <msnuser name="dev2" email="ccnetsendmsndev2@live.com" sccname="dev2" />
+  </msnusers>
+</msn>

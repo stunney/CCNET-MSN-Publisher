@@ -1,0 +1,18 @@
+Step 1 -- Compile
+This is the easy part.   compile using the NAnt script provided, or through Visual Studio .NET
+
+Step 2 -- Copy Generated Assemblies to the CruiseControl.NET runtime folder
+The following files should be included:
+XihSolutions.DotMSN.dll
+ccnet.Publishers.MSN.plugin.dll
+
+***********************
+NOTE:  Make SURE you do not overwrite your existing Core and Remote libraries for CruiseControl.NET.
+If you have trouble running the Plugin, you may find that you need to update the Assemblies in the lib folder of this
+project and recompile to update version properties for this project to work.
+***********************
+
+Step 3 -- Update your ccnet.config projects that you wish to have msn publishing for.  There is a
+sample project configuration file provided in the test project that you can use as a template.
+
+Remember, you need to have a valid msn messenger passport in order for this plugin to work! :)
